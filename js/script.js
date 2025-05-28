@@ -1,107 +1,128 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Remove loading screen
+// Loading
+window.addEventListener('load', () => {
     const loading = document.getElementById('loading');
-    if (loading) {
-        window.addEventListener('load', () => {
-            loading.style.opacity = '0';
-            setTimeout(() => {
-                loading.style.display = 'none';
-            }, 500);
-        });
+    if (loading) { // 要素が存在するか確認
+        loading.style.opacity = '0';
+        setTimeout(() => {
+            loading.style.display = 'none';
+        }, 500);
     }
+});
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === "#") { // Avoid scrolling for placeholder links like href="#"
-                e.preventDefault();
-                return;
-            }
+// Mobile Menu
+const hamburger = document.getElementById('hamburger');
+const drawer = document.getElementById('drawer');
+const drawerClose = document.getElementById('drawer-close');
 
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                const header = document.querySelector('.header');
-                const headerHeight = header ? header.offsetHeight : 0;
-                const targetPosition = target.offsetTop - headerHeight - 20; // 20px offset
+if (hamburger && drawer && drawerClose) { // 要素が存在するか確認
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        drawer.classList.toggle('active');
+        document.body.classList.toggle('drawer-open'); // bodyにクラスを付与して背景固定などに対応
+    });
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+    drawerClose.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        drawer.classList.remove('active');
+        document.body.classList.remove('drawer-open');
+    });
 
-                // If mobile menu is open, close it after click
-                if (navMenu && navMenu.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
+    // Drawer menu links click event
+    const drawerLinks = drawer.querySelectorAll('a[href^="#"]');
+    drawerLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            drawer.classList.remove('active');
+            document.body.classList.remove('drawer-open');
+            // Smooth scrollは下の共通処理に任せる
+        });
+    });
+}
+
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        // href="#" や href="" の場合は何もしない
+        if (href === '#' || href === '') {
+            e.preventDefault();
+            return;
+        }
+
+        const target = document.querySelector(href);
+        if (target) {
+            e.preventDefault();
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20; // 20pxのオフセット
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+
+            // Close drawer if open (ハンバーガーメニューが開いていたら閉じる)
+            if (hamburger && drawer && hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                drawer.classList.remove('active');
+                if (document.body.classList.contains('drawer-open')) {
+                    document.body.classList.remove('drawer-open');
                 }
             }
-        });
+        }
     });
-
-    // Header background on scroll
-    const header = document.querySelector('.header');
-    if (header) {
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 50) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 1px 10px rgba(0, 0, 0, 0.05)';
-            }
-            lastScroll = currentScroll;
-        });
-    }
-
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationDelay = entry.target.dataset.delay || '0.2s'; // Use data-delay if set
-                entry.target.classList.add('animated'); // Add 'animated' to trigger CSS animation
-                // obs.unobserve(entry.target); // Optional: stop observing after animation
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements with class 'animate' (changed from 'animate-on-scroll')
-    document.querySelectorAll('.animate-on-scroll').forEach((el, index) => {
-        // el.dataset.delay = `${index * 0.1}s`; // Example: Stagger animations
-        el.classList.add('animate'); // Add 'animate' class for initial styling (opacity: 0)
-        observer.observe(el);
-    });
-
-
-    // Mobile menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
-
-    // Service card hover effect (This is already handled by CSS :hover, but if JS specific logic is needed in future)
-    // document.querySelectorAll('.service-card').forEach(card => {
-    //     card.addEventListener('mouseenter', function() {
-    //         // Example: this.style.transform = 'translateY(-10px)';
-    //     });
-    //     card.addEventListener('mouseleave', function() {
-    //         // Example: this.style.transform = 'translateY(0)';
-    //     });
-    // });
-    // Note: The original JS for service card hover was redundant as CSS :hover already handles it.
-    // I've commented it out but left the structure if you need JS-driven hover effects later.
 });
+
+// Scroll Animation
+const observerOptions = {
+    threshold: 0.1, // 要素が10%見えたら発火
+    rootMargin: '0px 0px -50px 0px' // 画面下部より50px手前で判定開始
+};
+
+const observer = new IntersectionObserver((entries, obs) => { // obsを引数に追加
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            obs.unobserve(entry.target); // 一度表示されたら監視を解除（パフォーマンス向上のため）
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.animate').forEach(el => {
+    observer.observe(el);
+});
+
+// Header Shadow on Scroll
+let lastScroll = 0;
+const header = document.querySelector('.header');
+
+if (header) { // header要素が存在するか確認
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) { // ページトップの場合
+            header.classList.remove('header-scrolled');
+            header.style.boxShadow = '0 1px 10px rgba(0, 0, 0, 0.05)'; // 初期スタイルに戻す
+            return;
+        }
+
+        if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
+            // Scroll Down - 必要であればヘッダーを隠す処理
+            // header.classList.add('header-hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
+            // Scroll Up - ヘッダーを再表示する処理
+            // header.classList.remove('header-hidden');
+        }
+
+        if (currentScroll > 100) {
+            header.classList.add('header-scrolled'); // スクロール状態を示すクラス
+            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.classList.remove('header-scrolled');
+            header.style.boxShadow = '0 1px 10px rgba(0, 0, 0, 0.05)';
+        }
+
+        lastScroll = currentScroll;
+    });
+}
