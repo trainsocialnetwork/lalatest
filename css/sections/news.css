@@ -1,0 +1,153 @@
+.news-section { /* This class is on the <section> element */
+    background: var(--bg-beige); /* As per original styles */
+}
+
+.news-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Slightly reduced gap for tabs */
+    margin-bottom: 50px;
+    flex-wrap: wrap; /* Allow tabs to wrap on small screens */
+}
+
+.news-tab {
+    padding: 10px 30px;
+    background: transparent;
+    border: 1px solid var(--border-light);
+    border-radius: 30px;
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 15px;
+    outline: none; /* Remove browser default outline on button */
+}
+button.news-tab { /* If using <button> elements for tabs */
+    /* Inherits above styles */
+}
+
+
+.news-tab.active,
+.news-tab:hover {
+    background: var(--primary-gold);
+    color: var(--white);
+    border-color: var(--primary-gold);
+}
+
+.news-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.news-item {
+    padding: 30px 0; /* Default padding */
+    border-bottom: 1px solid var(--border-light);
+    opacity: 0; /* For animation */
+    transform: translateY(20px); /* For animation */
+    transition: all 0.6s ease, background-color 0.3s, box-shadow 0.3s, margin 0.3s, padding 0.3s;
+    /* Break down transitions for clarity if needed */
+}
+
+.news-item.visible { /* Added by JS for scroll animation */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.news-item:hover {
+    background: var(--white);
+    margin: 0 -30px; /* Expand outwards on hover */
+    padding: 30px 30px;  /* Adjust padding to match expanded margin */
+    border-radius: 20px;
+    border-bottom: 1px solid transparent; /* Hide original border, or adjust */
+    box-shadow: var(--shadow-soft); /* Add shadow on hover */
+    /* transform: scale(1.02); Optional subtle scale */
+}
+.news-item:last-child {
+    border-bottom: none; /* No border for the last item in the list */
+}
+.news-item:hover:last-child { /* Ensure hover on last item also has no bottom border */
+    border-bottom: 1px solid transparent;
+}
+
+
+.news-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* Allow meta items to wrap */
+}
+
+.news-date {
+    font-family: 'Poppins', sans-serif; /* English font for date */
+    font-size: 14px;
+    color: var(--text-light);
+    font-weight: 300;
+}
+
+.news-category {
+    display: inline-block;
+    padding: 5px 20px;
+    background: var(--primary-gold); /* Default category color */
+    color: var(--white);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: capitalize; /* e.g., news -> News */
+}
+
+.news-category.column { /* Specific category color */
+    background: var(--primary-pink);
+}
+
+.news-category.campaign { /* Specific category color */
+    background: #FF6B6B; /* A distinct campaign color */
+}
+/* Add more specific category styles if needed */
+/* .news-category.event { background: #some-other-color; } */
+
+
+.news-title { /* This is an <a> tag */
+    display: block; /* Make it block to take full width */
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
+
+.news-item:hover .news-title {
+    color: var(--primary-gold);
+}
+
+.news-more {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.news-more a {
+    color: var(--primary-gold);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-flex; /* For aligning arrow */
+    align-items: center;
+    gap: 10px;
+    transition: gap 0.3s ease, color 0.3s ease;
+}
+
+.news-more a::after { /* Arrow */
+    content: '→';
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.news-more a:hover {
+    gap: 20px; /* Increase gap on hover */
+    color: #9b7a59; /* Darken on hover */
+}
+.news-more a:hover::after {
+    transform: translateX(5px);
+}

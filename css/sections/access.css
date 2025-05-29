@@ -1,0 +1,107 @@
+.access-section { /* This class is on the <section> element */
+    background: var(--white); /* As per original styles */
+}
+
+.access-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: single column */
+    gap: 50px;
+}
+
+.access-info {
+    background: var(--bg-beige); /* Background for info block */
+    padding: 50px; /* Mobile padding */
+    border-radius: 30px;
+    opacity: 0; /* For animation */
+    transform: translateY(30px); /* For animation */
+    transition: all 0.8s ease; /* Can be handled by .fade-in */
+}
+
+.access-info.visible { /* Added by JS for scroll animation */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.access-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.access-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.access-label {
+    font-weight: 500;
+    display: block; /* Or inline-block if preferred */
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--primary-gold); /* Label color */
+}
+
+.access-item p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-sub);
+}
+.access-item p a { /* For tel link */
+    color: var(--text-sub);
+    text-decoration: none;
+}
+.access-item p a:hover {
+    color: var(--primary-gold);
+    text-decoration: underline;
+}
+
+.access-item strong { /* For highlighting parts of text if needed */
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.access-map {
+    width: 100%;
+    height: 300px; /* Mobile map height */
+    border-radius: 30px;
+    overflow: hidden; /* Ensure iframe respects border-radius */
+    box-shadow: var(--shadow-soft);
+    opacity: 0; /* For animation */
+    transform: translateY(30px); /* For animation */
+    transition: all 0.8s ease 0.2s; /* Delayed animation for map */
+}
+
+.access-map.visible { /* Added by JS for scroll animation */
+    opacity: 1;
+    transform: translateY(0);
+}
+.access-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+.access-cta {
+    margin-top: 30px; /* Space above "Google Mapで見る" button */
+    text-align: left; /* Or center if preferred */
+}
+.access-cta .btn-secondary { /* Making sure it uses the secondary style if that's the intent */
+    /* Styles are already defined in buttons.css */
+}
+
+
+/* PC Styles for Access */
+@media (min-width: 1024px) {
+    .access-content {
+        grid-template-columns: 1fr 1fr; /* Two columns on PC */
+        gap: 60px;
+        align-items: start; /* Align items to the top */
+    }
+    .access-map {
+        height: 400px; /* Taller map on PC */
+    }
+}
