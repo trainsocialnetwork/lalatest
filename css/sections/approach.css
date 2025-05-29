@@ -1,0 +1,8 @@
+/* Specific styles for #approach section if .service-cards needs adjustment
+   or if there are other unique elements within this section.
+   For now, most styles are covered by general .section and .service-cards. */
+
+#approach .section-description {
+    /* Example of a specific adjustment if needed */
+    /* max-width: 750px; */
+}

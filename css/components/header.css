@@ -1,0 +1,182 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--white);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05); /* Initial shadow */
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header.scrolled { /* Added by JS on scroll */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Mobile padding */
+    height: 70px;    /* Mobile height */
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--primary-gold);
+}
+
+/* Navigation for PC (hidden on mobile by default) */
+.nav-menu {
+    display: none; /* Shown in PC styles */
+}
+
+/* Hamburger Menu (mobile) */
+.menu-trigger {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+    display: flex; /* For centering spans if needed, or use absolute positioning carefully */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.menu-trigger:hover {
+    background-color: var(--secondary-pink);
+}
+
+.menu-trigger span {
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--text-main);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* transform-origin: center; */ /* Useful for rotations */
+}
+
+.menu-trigger span:nth-child(1) {
+    top: 19px; /* (50px height - 2px bar - 5px gap - 2px bar - 5px gap - 2px bar) / 2 + 2px bar / 2 for top one approx if centered */
+}
+
+.menu-trigger span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu-trigger span:nth-child(3) {
+    bottom: 19px;
+}
+
+/* Hamburger active state (X shape) */
+.menu-trigger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px); /* Adjust translate values for perfect centering */
+    top: 50%; /* Center vertically before rotate */
+}
+
+.menu-trigger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-trigger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px); /* Adjust translate values */
+    bottom: auto; /* Override bottom positioning */
+    top: 50%; /* Center vertically before rotate */
+
+}
+
+
+/* PC Styles for Header */
+@media (min-width: 1024px) {
+    .header-inner {
+        padding: 0 40px; /* PC padding */
+        height: 80px;    /* PC height */
+    }
+
+    .menu-trigger { /* Hide hamburger on PC */
+        display: none;
+    }
+
+    .nav-menu {
+        display: flex;
+        gap: 35px;
+        align-items: center;
+        list-style: none; /* If it was a ul/li */
+    }
+
+    .nav-menu a {
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 400; /* As per content plan */
+        transition: all 0.3s ease;
+        position: relative;
+        padding-bottom: 5px; /* Space for underline */
+    }
+
+    .nav-menu a::after {
+        content: '';
+        position: absolute;
+        bottom: 0; /* Adjusted from -5px */
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gold);
+        transition: width 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+        color: var(--primary-gold);
+    }
+
+    .nav-menu a:hover::after {
+        width: 100%;
+    }
+
+    .nav-cta { /* PC nav CTA button */
+        background: var(--primary-gold);
+        color: var(--white);
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none; /* Ensure no underline from a tag */
+    }
+
+    .nav-cta:hover {
+        background: #9b7a59; /* Darken primary-gold */
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(184, 149, 111, 0.3); /* Use var(--shadow-hover) or similar */
+    }
+
+    .nav-cta::after { /* Remove underline effect from general nav links */
+        display: none;
+    }
+}

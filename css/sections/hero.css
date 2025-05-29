@@ -1,0 +1,132 @@
+.hero {
+    margin-top: 70px; /* Matches mobile header height */
+    position: relative;
+    min-height: calc(100vh - 70px); /* Full viewport height minus header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, var(--secondary-pink) 0%, var(--white) 100%);
+    overflow: hidden; /* For bg decoration */
+    text-align: center; /* Center content by default */
+}
+
+.hero-bg-decoration {
+    position: absolute;
+    width: 200%; /* Larger than viewport for movement */
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(228, 165, 160, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(184, 149, 111, 0.08) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    z-index: 0; /* Behind content */
+}
+
+.hero-content {
+    position: relative; /* To stay above bg-decoration */
+    z-index: 1;
+    padding: 60px 20px; /* Mobile padding */
+    max-width: 900px;
+    margin: 0 auto; /* Center content block */
+}
+
+.hero-subtitle {
+    font-family: 'Poppins', sans-serif; /* As per content plan, Poppins for subtitles sometimes */
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--primary-gold);
+    margin-bottom: 20px;
+    opacity: 0; /* For animation */
+    animation: fadeInUp 0.8s ease forwards; /* Animation applied */
+}
+
+.hero-title {
+    font-size: clamp(32px, 7vw, 52px); /* Responsive font size */
+    font-weight: 300; /* Base weight */
+    line-height: 1.4;
+    margin-bottom: 30px;
+    font-family: 'Noto Serif JP', serif; /* Main title font */
+    letter-spacing: 0.05em;
+    color: var(--text-main); /* Default color */
+    opacity: 0; /* For animation */
+    animation: fadeInUp 0.8s ease 0.2s forwards; /* Staggered animation */
+}
+
+.hero-title strong { /* For "新しい自分へ" */
+    font-weight: 600; /* Bolder */
+    background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* text-fill-color: transparent; */ /* Standard property */
+}
+
+.hero-subtitle-bottom {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-sub);
+    margin-bottom: 40px;
+    letter-spacing: 0.02em;
+    opacity: 0; /* For animation */
+    animation: fadeInUp 0.8s ease 0.4s forwards; /* Staggered animation */
+}
+
+.hero-lead {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--text-sub);
+    margin-bottom: 50px;
+    max-width: 650px; /* Constrain width of lead text */
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0; /* For animation */
+    animation: fadeInUp 0.8s ease 0.6s forwards; /* Staggered animation */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    opacity: 0; /* For animation */
+    animation: fadeInUp 0.8s ease 0.8s forwards; /* Staggered animation */
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--primary-gold);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    font-family: 'Poppins', sans-serif; /* English font for "SCROLL" */
+    opacity: 0; /* For animation */
+    animation: fadeIn 1s ease 1s forwards; /* Delayed fade in */
+    z-index: 1;
+}
+
+.scroll-indicator::before { /* Animated line */
+    content: '';
+    display: block;
+    width: 1px;
+    height: 50px;
+    background: var(--primary-gold);
+    margin: 0 auto 15px;
+    animation: scrollLine 2s ease-in-out infinite;
+}
+
+/* PC Styles for Hero */
+@media (min-width: 1024px) {
+    .hero {
+        margin-top: 80px; /* Matches PC header height */
+        min-height: calc(100vh - 80px);
+    }
+
+    .hero-content {
+        padding: 80px 40px; /* PC padding */
+    }
+}

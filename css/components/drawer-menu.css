@@ -1,0 +1,187 @@
+.drawer-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Initially off-screen */
+    width: 85%;
+    max-width: 350px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    z-index: 1001; /* Above header but below potential modals if any higher */
+}
+
+.drawer-menu.active { /* Added by JS */
+    right: 0;
+}
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000; /* Below drawer menu, above content */
+}
+
+.drawer-overlay.active { /* Added by JS */
+    opacity: 1;
+    visibility: visible;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px; /* Match mobile header inner padding for consistency */
+    height: 70px; /* Match mobile header height */
+    border-bottom: 1px solid var(--border-light);
+}
+
+.drawer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px; /* Slightly smaller than main logo */
+    font-weight: 500;
+    color: var(--primary-gold);
+}
+
+.drawer-close {
+    width: 40px; /* Clickable area */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    font-size: 24px; /* For the '×' character */
+    color: var(--text-sub);
+    line-height: 1; /* Ensure '×' is centered */
+}
+
+.drawer-close:hover {
+    background-color: var(--secondary-pink);
+    color: var(--primary-gold);
+}
+
+.drawer-nav {
+    padding: 30px 0;
+}
+
+.drawer-nav > a {
+    display: block;
+    padding: 18px 30px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.drawer-nav > a::after { /* Separator line */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    right: 30px;
+    height: 1px;
+    background: var(--border-light);
+}
+.drawer-nav > a:last-of-type::after { /* No line for last main link if submenu follows */
+    /* display: none; */ /* Or check if it's followed by submenu directly */
+}
+
+
+.drawer-nav > a:hover {
+    background: var(--secondary-pink);
+    color: var(--primary-gold);
+}
+
+.drawer-submenu {
+    background: var(--bg-beige); /* Slightly different background for submenu */
+    padding: 15px 0;
+    /* margin-top: -1px; Remove top border of next item if submenu is directly after */
+}
+.drawer-submenu a:first-child {
+    border-top: 1px solid var(--border-light); /* Add top border if not handled by a::after */
+}
+
+
+.drawer-submenu a {
+    display: block;
+    padding: 12px 50px; /* Indented */
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.drawer-submenu a::after { /* Separator line for submenu items */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    right: 30px;
+    height: 1px;
+    background: var(--border-light);
+}
+.drawer-submenu a:last-child::after {
+    display: none;
+}
+
+
+.drawer-submenu a:hover {
+    color: var(--primary-gold);
+    padding-left: 55px; /* Slight indent on hover */
+    background-color: var(--accent-pink);
+}
+
+.drawer-cta {
+    margin: 30px;
+    display: block;
+    background: var(--primary-gold);
+    color: var(--white);
+    text-align: center;
+    padding: 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.drawer-cta:hover {
+    background: #9b7a59; /* Darken primary-gold */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(184, 149, 111, 0.3);
+}
+
+.drawer-contact {
+    padding: 30px;
+    text-align: center;
+    background: var(--bg-beige);
+    border-top: 1px solid var(--border-light);
+}
+
+.drawer-contact p {
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-bottom: 10px;
+}
+
+.drawer-contact a {
+    font-size: 20px;
+    color: var(--primary-gold);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+.drawer-contact a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,69 @@
+.btn {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    position: relative; /* For potential pseudo-elements or effects */
+    overflow: hidden;   /* For ripple or shine effects */
+    cursor: pointer;
+    border: none; /* Assuming most are background based */
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary-gold);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(184, 149, 111, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184, 149, 111, 0.35); /* var(--shadow-hover) like */
+    background: #9b7a59; /* Darken primary-gold */
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--primary-gold);
+    border: 2px solid var(--primary-gold);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-gold);
+    color: var(--white);
+    transform: translateY(-2px); /* Add consistent hover effect */
+}
+
+.btn-line { /* For LINE specific button */
+    background: #00B900; /* LINE green */
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 185, 0, 0.2);
+}
+
+.btn-line:hover {
+    background: #009900; /* Darker LINE green */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 185, 0, 0.3);
+}
+
+/* Service buttons (used in service-details section) */
+.btn-service { /* This class is used in HTML but not styled yet, assuming it's a modifier */
+    flex: 1; /* From .service-buttons context */
+    min-width: 200px; /* From .service-buttons context */
+    /* It will inherit .btn styles, then can be modified by .btn-primary or .btn-line */
+}
+
+.footer-cta { /* Specific CTA in footer, may differ from .btn */
+    /* Example: use btn styles or define uniquely */
+    /* padding: 14px 35px; */
+    /* font-size: 16px; */
+}
+@media (min-width: 1024px) {
+     .nav-cta { /* Already in header.css, but if it was generic */
+        /* ... */
+    }
+}

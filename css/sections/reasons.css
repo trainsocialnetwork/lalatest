@@ -1,0 +1,6 @@
+.reasons-section { /* This class is on the <section> element */
+    background: var(--bg-beige); /* As per original styles */
+}
+
+/* Specific styles for #reasons section if needed.
+   For now, most styles are covered by general .section and .reason-block in cards.css. */
