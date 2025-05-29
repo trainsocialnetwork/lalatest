@@ -1,0 +1,43 @@
+.fixed-actions {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999; /* Above most content, below modals potentially */
+}
+
+.fixed-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 24px; /* Icon size */
+    color: var(--white); /* Default icon color */
+}
+
+.fixed-btn-primary { /* For general CTA like "Free Consultation" */
+    background: var(--primary-gold);
+}
+.fixed-btn-primary:hover {
+    background: #9b7a59;
+}
+
+
+.fixed-btn-line { /* For LINE */
+    background: #00B900; /* LINE green */
+}
+.fixed-btn-line:hover {
+    background: #009900;
+}
+
+.fixed-btn:hover {
+    transform: scale(1.1) translateY(-3px); /* Combined effect */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
