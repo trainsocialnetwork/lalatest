@@ -1,0 +1,230 @@
+/* Section Common Styles */
+.section {
+    padding: 100px 20px;
+    position: relative;
+}
+
+.section:nth-child(even) { /* This might need adjustment if main > section direct children changes */
+    background: var(--bg-beige);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease; /* This can be handled by .fade-in logic too */
+}
+
+.section-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title-en {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--primary-gold);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.section-title-ja {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 300;
+    margin-bottom: 30px;
+    font-family: 'Noto Serif JP', serif;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+}
+
+.section-line {
+    width: 50px;
+    height: 1px;
+    background: var(--primary-gold);
+    margin: 0 auto 40px;
+}
+
+.section-description { /* This is a general section description, specific might exist too */
+    font-size: 16px;
+    color: var(--text-sub);
+    line-height: 2;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    background: #2A2A2A;
+    color: var(--white);
+    padding: 80px 20px 30px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile first */
+    gap: 50px;
+    text-align: center; /* Mobile first */
+}
+
+.footer-main {
+    margin-bottom: 30px;
+}
+
+.footer-logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    margin-bottom: 30px;
+    letter-spacing: 0.05em;
+    font-weight: 300;
+}
+
+.footer-info {
+    font-size: 15px;
+    line-height: 2;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.footer-info a {
+    color: var(--primary-gold);
+    text-decoration: none;
+}
+.footer-links h4, .footer-social-contact h4 { /* Added for structure from HTML */
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: var(--primary-gold);
+}
+
+
+.footer-nav {
+    display: flex;
+    justify-content: center; /* Mobile */
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.footer-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 15px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--primary-gold);
+    transition: width 0.3s ease;
+}
+
+.footer-nav a:hover {
+    opacity: 1;
+    color: var(--primary-gold);
+}
+
+.footer-nav a:hover::after {
+    width: 100%;
+}
+
+.footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column; /* Mobile */
+    align-items: center;   /* Mobile */
+    gap: 20px;
+}
+.footer-legal { /* Added from HTML */
+    display: flex;
+    gap: 20px;
+}
+.footer-legal a {
+    color: var(--white);
+    opacity: 0.7;
+    text-decoration: none;
+    font-size: 13px;
+}
+.footer-legal a:hover {
+    opacity: 1;
+    color: var(--primary-gold);
+}
+
+
+.footer-social {
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Mobile */
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 20px;
+}
+
+.social-link:hover {
+    background: var(--primary-gold);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    font-size: 13px;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+}
+
+
+/* PC Styles for Layout & Footer */
+@media (min-width: 1024px) {
+    .section {
+        padding: 120px 40px;
+    }
+    main { /* Main content adjustment for left fixed menu */
+        margin-left: 270px;
+    }
+
+    .footer-content {
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 80px;
+        text-align: left;
+    }
+    .footer-links h4, .footer-social-contact h4 {
+        text-align: left;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 0; /* Adjust as needed */
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .footer-social {
+        justify-content: flex-start;
+    }
+}
