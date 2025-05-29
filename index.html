@@ -397,6 +397,20 @@
         <a href="#" class="fixed-btn fixed-btn-line" aria-label="LINEで相談する">
             <i class="fab fa-line"></i> </a>
     </div>
+    <script>
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loading');
+            if (loadingScreen) {
+                // オプション1: フェードアウトさせる場合 (CSSで transition: opacity 0.5s ease; が設定されている想定)
+                loadingScreen.style.opacity = '0';
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 500); // CSSのtransition時間と合わせる
 
+                // オプション2: すぐに非表示にする場合
+                // loadingScreen.style.display = 'none';
+            }
+        });
+    </script>
     </body>
 </html>
