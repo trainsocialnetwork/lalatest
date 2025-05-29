@@ -1,0 +1,207 @@
+/* Service Cards (Approach Section) */
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer; /* If the whole card is clickable */
+    opacity: 0; /* For animation */
+    transform: translateY(30px); /* For animation */
+    display: flex; /* To make content fill height if needed */
+    flex-direction: column;
+}
+
+.service-card.visible { /* Added by JS for scroll animation */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.service-card-image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden; /* For pseudo-elements */
+}
+
+.service-card-image::after { /* Overlay effect on hover */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover .service-card-image::after {
+    opacity: 1;
+}
+
+.service-card-content {
+    padding: 30px;
+    flex-grow: 1; /* Ensure content area grows to fill card */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.service-card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 500; /* Content plan might specify heavier */
+    letter-spacing: 0.02em;
+    color: var(--text-main); /* Ensure color is set */
+}
+
+.service-card p {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Allow paragraph to take available space */
+}
+
+.service-card-link {
+    color: var(--primary-gold);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex; /* For aligning arrow */
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s ease, color 0.3s ease; /* Added color transition */
+}
+.service-card-link:hover {
+    color: #9b7a59; /* Darken on hover */
+}
+
+.service-card-link::after { /* Arrow */
+    content: '→';
+    font-size: 16px;
+    transition: transform 0.3s ease; /* For potential transform on hover */
+}
+
+.service-card:hover .service-card-link {
+    gap: 15px;
+}
+.service-card:hover .service-card-link::after {
+    transform: translateX(3px);
+}
+
+
+/* Reason Blocks (Reasons Section) */
+.reason-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Mobile: 1 column */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reason-block {
+    background: var(--white);
+    padding: 50px 35px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0; /* For animation */
+    transform: translateY(30px); /* For animation */
+    position: relative;
+    overflow: hidden; /* For ::before pseudo-element */
+}
+
+.reason-block.visible { /* Added by JS for scroll animation */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reason-block:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.reason-block::before { /* Decorative background pattern/image - optional */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    /* background-image: url('path/to/reason-bg-pattern.svg'); */ /* Example */
+    opacity: 0.05; /* Very subtle */
+    z-index: 0; /* Behind content */
+}
+
+.reason-icon {
+    position: relative; /* To stay above ::before */
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    background: var(--secondary-pink); /* Default icon bg */
+    color: var(--primary-gold); /* Default icon color */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 36px; /* Size of icon char/SVG */
+    transition: all 0.3s ease;
+}
+
+.reason-block:hover .reason-icon {
+    background: var(--primary-gold);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.reason-title {
+    position: relative;
+    z-index: 1;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 500; /* Content plan */
+    letter-spacing: 0.02em;
+    color: var(--text-main);
+}
+
+.reason-description {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.8;
+}
+
+/* PC Styles for Cards */
+@media (min-width: 1024px) {
+    .service-cards {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on PC */
+        gap: 40px;
+    }
+
+    .reason-blocks {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on PC for reasons */
+        gap: 50px;
+    }
+}
